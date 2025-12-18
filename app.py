@@ -2,6 +2,10 @@ import os
 from dotenv import load_dotenv
 import streamlit as st
 
+import imageio_ffmpeg
+import os
+
+os.environ["IMAGEIO_FFMPEG_EXE"] = imageio_ffmpeg.get_ffmpeg_exe()
 
 # Load .env file
 load_dotenv()
@@ -17,7 +21,8 @@ from datetime import timedelta
 import srt
 import whisper
 import streamlit as st
-from moviepy.editor import VideoFileClip
+# from moviepy.editor import VideoFileClip
+from moviepy.video.io.VideoFileClip import VideoFileClip
 from collections import Counter
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
@@ -701,4 +706,5 @@ General answer: {qa_validated.general_answer}
         **Response:** {row[4][:300]}  
         **Confidence:** {row[5]}
          ---
+
      """)
