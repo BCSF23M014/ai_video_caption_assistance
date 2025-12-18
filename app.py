@@ -11,8 +11,13 @@ os.environ["IMAGEIO_FFMPEG_EXE"] = imageio_ffmpeg.get_ffmpeg_exe()
 load_dotenv()
 
 import spacy
+try:
+    nlp = spacy.load("xx_sent_ud_sm")
+except OSError:
+    import spacy.cli
+    spacy.cli.download("xx_sent_ud_sm")
+    nlp = spacy.load("xx_sent_ud_sm")
 
-nlp = spacy.blank("xx")  # use blank model if xx-sent-ud-sm is installed
 
 @st.cache_resource
 def load_whisper_model():
@@ -712,4 +717,5 @@ General answer: {qa_validated.general_answer}
          ---
 
      """)
+
 
